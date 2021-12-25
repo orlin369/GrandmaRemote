@@ -144,9 +144,6 @@ void update_loop()
   // Wait for WiFi connection.
   if ((WiFiMultyClient_g.run() == WL_CONNECTED))
   {
-    // Inform the user that the proces of calling has began.
-    digitalWrite(PIN_LED, HIGH);
-
     // CAll the server.
     HTTPClient_g.begin(URL_g); //HTTP
     Serial.println("[HTTP] begin...");
@@ -198,10 +195,6 @@ void setup()
   // Init UART.
   Serial.begin(115200);
 
-  // 
-  BatteryVoltage_g = bat_voltage();
-  Serial.println("BatteryVoltage_g: " + String(BatteryVoltage_g));
-
   // Read the state of the pushbutton value.
   ButtonState_g = 0;
   WakeupStatus_g = esp_sleep_get_ext1_wakeup_status();
@@ -223,6 +216,12 @@ void setup()
 
   // User LED.
   pinMode(PIN_LED, OUTPUT);
+  // Inform the user that the proces of calling has began.
+  digitalWrite(PIN_LED, HIGH);
+
+  // 
+  BatteryVoltage_g = bat_voltage();
+  Serial.println("BatteryVoltage_g: " + String(BatteryVoltage_g));
 
   //Increment boot number and print it every reboot
   ++BootCount_g;
