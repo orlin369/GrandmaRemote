@@ -1,5 +1,5 @@
 {
     "sketch": "GrandmaRemote.ino",
     "board": "esp32:esp32:esp32",
-    "port": "COM6"
+    "port": "COM9"
 }

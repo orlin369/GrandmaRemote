@@ -59,19 +59,19 @@ SOFTWARE.
  * @brief button input 2.
  * 
  */
-#define PIN_INPUT_2 27
+#define PIN_INPUT_2 14
 
 /**
  * @brief button input 3.
  * 
  */
-#define PIN_INPUT_3 14
+#define PIN_INPUT_3 15
 
 /**
  * @brief button input 4.
  * 
  */
-#define PIN_INPUT_4 15
+#define PIN_INPUT_4 27
 
 /**
  * @brief 
