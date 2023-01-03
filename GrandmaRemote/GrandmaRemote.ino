@@ -179,7 +179,7 @@ void update_loop()
     // End HTTP connection.
     HTTPClient_g.end();
     
-    // 
+    // Inform the user that the process of calling is enup succesfully and it is time to sleep!
     digitalWrite(PIN_LED, LOW);
 
     // Bye bye ...
@@ -228,7 +228,7 @@ void setup()
   // Inform the user that the proces of calling has began.
   digitalWrite(PIN_LED, HIGH);
 
-  // 
+  // Read battery voltage!
   BatteryVoltage_g = bat_voltage();
   Serial.println("[BAT] BatteryVoltage_g: " + String(BatteryVoltage_g));
 
