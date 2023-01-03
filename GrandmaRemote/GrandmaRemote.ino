@@ -40,6 +40,8 @@ SOFTWARE.
 
 #pragma region Variables
 
+esp_sleep_wakeup_cause_t WakeupReason_g;
+
 /**
  * @brief Boot time counts.
  * 
@@ -122,9 +124,7 @@ double bat_voltage()
  */
 void print_wakeup_reason()
 {
-  esp_sleep_wakeup_cause_t wakeup_reason;
-  wakeup_reason = esp_sleep_get_wakeup_cause();
-  switch(wakeup_reason)
+  switch(WakeupReason_g)
   {
     case 1  : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
     case 2  : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
@@ -198,6 +198,9 @@ void update_loop()
 
 void setup()
 {
+  // Get wakeup reason.
+  WakeupReason_g = esp_sleep_get_wakeup_cause();
+
   // Init UART.
   Serial.begin(115200);
 
@@ -237,6 +240,7 @@ void setup()
   URL_g = String(END_POINT)
     + "?btn=" + String(ButtonState_g)
     + "&bat=" + String(BatteryVoltage_g)
+    + "&wkr=" + String(WakeupReason_g)
     + "&bootc=" + String(BootCount_g);
   Serial.println(URL_g);
 
