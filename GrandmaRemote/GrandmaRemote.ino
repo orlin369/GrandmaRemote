@@ -112,7 +112,7 @@ String URL_g = "";
 double bat_voltage()
 {
   double vin = map(analogRead(PIN_BATT), 0.0f, 4095.0f, 0, 3.3F);
-  double voltage = (vin / DIV_R2) / (DIV_R1+DIV_R2);
+  double voltage = (vin / DIV_R2) / (DIV_R1 + DIV_R2);
   return voltage;
 }
 
@@ -141,8 +141,14 @@ void print_wakeup_reason()
  */
 void update_loop()
 {
+  // 
+  static int WiFiMultyClientStateL = 0;
+
+  // Update WiFi client.
+  WiFiMultyClientStateL = WiFiMultyClient_g.run();
+
   // Wait for WiFi connection.
-  if ((WiFiMultyClient_g.run() == WL_CONNECTED))
+  if (WiFiMultyClientStateL == WL_CONNECTED)
   {
     // CAll the server.
     HTTPClient_g.begin(URL_g); //HTTP
@@ -184,7 +190,7 @@ void update_loop()
   }
   else
   {
-
+    Serial.printf("[WiFi] State: %s\n", WiFiMultyClientStateL);
   }
 }
 
@@ -202,7 +208,7 @@ void setup()
   ButtonState_g += (((1 << PIN_INPUT_2) & WakeupStatus_g) == (1 << PIN_INPUT_2)) * 2;
   ButtonState_g += (((1 << PIN_INPUT_3) & WakeupStatus_g) == (1 << PIN_INPUT_3)) * 4;
   ButtonState_g += (((1 << PIN_INPUT_4) & WakeupStatus_g) == (1 << PIN_INPUT_4)) * 8;
-  Serial.println("ButtonState_g: " + String(ButtonState_g));
+  Serial.println("[GPIO] ButtonState_g: " + String(ButtonState_g));
 
   // Prepare interupt mask.
   InteruptMask_g = 0;
@@ -221,11 +227,11 @@ void setup()
 
   // 
   BatteryVoltage_g = bat_voltage();
-  Serial.println("BatteryVoltage_g: " + String(BatteryVoltage_g));
+  Serial.println("[BAT] BatteryVoltage_g: " + String(BatteryVoltage_g));
 
   //Increment boot number and print it every reboot
   ++BootCount_g;
-  Serial.println("Boot number: " + String(BootCount_g));
+  Serial.println("[SYS] Boot number: " + String(BootCount_g));
 
   //
   URL_g = String(END_POINT)
