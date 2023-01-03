@@ -228,7 +228,10 @@ void setup()
   Serial.println("Boot number: " + String(BootCount_g));
 
   //
-  URL_g = String(END_POINT) + "?btn=" + String(ButtonState_g) + "&bat=" + String(BatteryVoltage_g) + "&bootc=" + String(BootCount_g);
+  URL_g = String(END_POINT)
+    + "?btn=" + String(ButtonState_g)
+    + "&bat=" + String(BatteryVoltage_g)
+    + "&bootc=" + String(BootCount_g);
   Serial.println(URL_g);
 
   // Connect 
@@ -236,7 +239,7 @@ void setup()
   WiFiMultyClient_g.addAP(MOBILE_SSID, MOBILE_PASS);
 
   // Print the wakeup reason for ESP32
-  // print_wakeup_reason();
+  print_wakeup_reason();
 
   //Go to sleep now
   // Serial.println("Going to sleep ...");

@@ -74,10 +74,10 @@ SOFTWARE.
 #define PIN_INPUT_4 27
 
 /**
- * @brief 
+ * @brief Dedicated ADC for battery input for ESP32 Feather.
  * 
  */
-#define PIN_BATT 35
+#define PIN_BATT A13
 
 /**
  * @brief Pin user LED.
