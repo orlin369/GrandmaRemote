@@ -35,16 +35,41 @@ SOFTWARE.
 #include "WProgram.h"
 #endif
 
+// NOTE: Be careful with the Version number in the server and here in the source code.
+// 1000
+// 10 - Major
+// 00 - Minor
+/** @brief Firmware version string. */
+#define ESP_FW_VERSION 1
+
+#pragma region Debug Terminal Configuration
+
+/** @brief Switch the logging terminal. */
+#define DEBUGLOG SERIALLOG
+
+/** @brief Debug output port. */
+#define DBG_OUTPUT_PORT Serial // Serial1 // on D4
+
+/** @brief Debug output port baud rate. */
+#define DBG_OUTPUT_PORT_BAUDRATE 115200
+
+#ifndef DEBUGLOG
+#define DEBUGLOG(...)
+#endif // !DEBUGLOG
+
+#pragma endregion
+
 // Vout = (Vin*R2)/(R1+R2)
 
+
 /**
- * @brief Battery voltage devider R1.
+ * @brief Battery voltage divider R1.
  * 
  */
 #define DIV_R1 100000
 
 /**
- * @brief Battery voltage devider R1.
+ * @brief Battery voltage divider R1.
  * 
  */
 #define DIV_R2 100000
@@ -86,7 +111,7 @@ SOFTWARE.
 #define PIN_LED 13
 
 /**
- * @brief Endpoint to the home controll server.
+ * @brief Endpoint to the home control server.
  * 
  */
 #define END_POINT "http://home.iot.loc:1880/api/kb"
