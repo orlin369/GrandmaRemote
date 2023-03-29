@@ -185,7 +185,7 @@ void update_loop()
         
     // Start connection and send HTTP header.
     int HTTPCodeL = HTTPClient_g.GET();
-    Serial.print("[HTTP] Get\n");
+    DEBUGLOG("[HTTP] Get\n");
     
     // HTTPCodeL will be negative on error.
     if(HTTPCodeL > 0)
@@ -227,10 +227,7 @@ void update_loop()
 
 void setup()
 {
-
-  // Init UART.
-  // Serial.begin(DBG_PORT_BAUDRATE);
-  	// Setup debug port module.
+  // Setup debug port module.
 	setup_debug_port();
 
   show_device_properties();
